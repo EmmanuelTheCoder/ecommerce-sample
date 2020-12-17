@@ -1,13 +1,13 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import Product from './components/Product';
 import Cart from './components/Cart';
 import Details from './components/Details';
 import Navbar from './components/Navbar';
 import ProductMenu from './components/ProductMenu';
+import Modal from './components/Modal'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function(){
+export default function App(){
     return(
         <div>
             <Navbar />
@@ -18,6 +18,7 @@ export default function(){
                
 
             </Switch>
+            <Modal />
         </div>
         
     );

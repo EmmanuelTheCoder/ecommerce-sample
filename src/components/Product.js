@@ -33,7 +33,14 @@ export default function Product(props) {
                                 <div className="price-cart-container">
             
                                     <h3> $<strong>{price}</strong></h3>
-                                    <ButtonContainer cart disabled={inCart ? true : false}>
+                                    <ButtonContainer cart disabled={inCart ? true : false} onClick={()=>{
+
+                                        value.addToCart(id);
+                                        value.openModal(id);
+                                    }
+                                    }
+                                        
+                                        >
                                         {inCart ? "inCart" : "Cart"}
                                     </ButtonContainer>
                                 </div>
