@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react';
+import React, {createContext, useState} from 'react';
 import {storeProducts, detailProduct} from './data';
 
 const ProductContext = createContext();
@@ -20,10 +20,6 @@ const getItem = (id) =>{
     return product;
 }
 
-useEffect(() =>{
-    const product = getProduct.products.find(items => console.log("product items", items));
-
-}, [])
 const handleDetail = (id) =>{
     const product = getItem(id);
     setGetProduct(()=>{
@@ -45,10 +41,6 @@ const addToCart = (id) =>{
         return {...getProduct, products: tempProducts, cart: [...getProduct.products, product]}
         
     });
-    setGetProduct(() =>{
-        return {...getProduct, cart: [...getProduct.products, product]}
-    })
-
 }
 
 const openModal = id =>{
