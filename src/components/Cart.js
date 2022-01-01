@@ -17,7 +17,7 @@ export default function Cart(props) {
                         <div>
                             {addedToCart.map(item =>{
                                 return(
-                                    <p>{item.title}</p>
+                                    <p key={item.id}>{item.title}</p>
                                 )    
                             })}
                         </div>

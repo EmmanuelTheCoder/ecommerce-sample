@@ -44,6 +44,9 @@ const addToCart = (id) =>{
     setGetProduct(()=>{
         return {...getProduct, products: tempProducts, cart: [...getProduct.products, product]}
         
+    });
+    setGetProduct(() =>{
+        return {...getProduct, cart: [...getProduct.products, product]}
     })
 
 }
