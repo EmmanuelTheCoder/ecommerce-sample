@@ -40,7 +40,7 @@ const addToCart = (id) =>{
     product.total = price;
 
     setGetProduct(()=>{
-        return {...getProduct, product: tempProducts, cart: [...getProduct.cart, product]}
+        return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
     })
 }
 
