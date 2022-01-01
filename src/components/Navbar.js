@@ -2,12 +2,14 @@ import React from 'react'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {ButtonContainer} from './Button';
+//import {ProductConsumer} from '../context'
 
 
 export default function Navbar(props) {
     
     return (
         <Container>
+
             <div className="navwrapper">
                 <Link to="/">
                     <h2>Havillah stores</h2>
@@ -19,8 +21,8 @@ export default function Navbar(props) {
                 </ButtonContainer>
                 </Link>
             </div>
-
         </Container>
+
     )
 }
 

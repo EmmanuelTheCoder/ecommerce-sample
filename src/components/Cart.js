@@ -8,7 +8,7 @@ export default function Cart(props) {
            <ProductConsumer >
                 {value =>{
                     console.log( "value from cart", value.cart);
-                    console.log("all properties", value)
+                    console.log("all properties", value.products)
                 }}
            </ProductConsumer>
            
