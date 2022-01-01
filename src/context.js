@@ -43,7 +43,9 @@ const addToCart = (id) =>{
 
     setGetProduct(()=>{
         return {...getProduct, products: tempProducts, cart: [...getProduct.products, product]}
+        
     })
+
 }
 
 const openModal = id =>{
