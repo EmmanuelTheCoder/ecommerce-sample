@@ -30,17 +30,20 @@ const addToCart = (id) =>{
     let tempProducts = [...getProduct.products];
     const index = tempProducts.indexOf(getItem(id));
     const product = tempProducts[index];
+    console.log("product from addToCart", index )
     product.inCart = true;
     product.count = 1;
     const price = product.price;
     product.total = price;
-
+    
+    
     //i haven't got a hang of why cart is returning undefined yet
-
+    
     setGetProduct(()=>{
         return {...getProduct, products: tempProducts, cart: [...getProduct.products, product]}
         
     });
+  
 }
 
 const openModal = id =>{

@@ -7,8 +7,8 @@ export default function Cart(props) {
         <div>
            <ProductConsumer >
                 {value =>{
-                    console.log( "value from cart", value.cart);
-                    console.log("all properties", value.products)
+                    // console.log( "value from cart", value.cart);
+                    // console.log("all properties", value.products)
 
                     const addedToCart = value.products.filter(item => item.inCart === true)
                     console.log("added to cart ", addedToCart)
@@ -17,7 +17,9 @@ export default function Cart(props) {
                         <div>
                             {addedToCart.map(item =>{
                                 return(
-                                    <p key={item.id}>{item.title}</p>
+                                    <div className="cart-items">
+
+                                    </div>
                                 )    
                             })}
                         </div>
