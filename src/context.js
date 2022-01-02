@@ -34,15 +34,22 @@ const addToCart = (id) =>{
     product.count = 1;
     const price = product.price;
     product.total = price;
+
+    tempProducts = ["is not working", "dsdsdsd"];
+
+    console.log(tempProducts);
     
     
     //i haven't got a hang of why cart is returning undefined yet
     
      setGetProduct(()=>{
-        return {...getProduct, products: ["Emmanuel", "John", "james"], cart: [...getProduct.products, product]}
+        return {...getProduct, products: tempProducts, cart: [...getProduct.products, product]}
         
     });
-    console.log("product from addToCart", getProduct.products)
+   
+
+
+ return console.log("product from addToCart", getProduct.products)
    
   
 }
