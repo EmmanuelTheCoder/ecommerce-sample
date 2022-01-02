@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 import {storeProducts, detailProduct} from './data';
 
 const ProductContext = createContext();
@@ -46,6 +46,7 @@ const addToCart = (id) =>{
    
   
 }
+
 
 const openModal = id =>{
     const product = getItem(id);
