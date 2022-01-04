@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom';
 import '../App.css';
 import { ProductConsumer} from '../context';
 
-export default function Product(props) {
+export default function Product({product}) {
     
-    const {id, price, img, title, inCart} = props.product;
+    const {id, price, img, title, inCart} = product;
 
     return (
           
@@ -16,6 +16,7 @@ export default function Product(props) {
            
                <ProductConsumer>
                    {value =>{
+                     
                        return(
                             <div className="display-flex">
                                 <div style={{marginTop: '6rem'}}></div>
@@ -38,6 +39,7 @@ export default function Product(props) {
 
                                         value.addToCart(id);
                                         value.openModal(id);
+                                        
                                     }
                                     }
                                         
