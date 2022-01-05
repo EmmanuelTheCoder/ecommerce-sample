@@ -15,6 +15,7 @@ const [getProduct, setGetProduct] = useState({
     
     
 });
+
 const getItem = (id) =>{
     const product = getProduct.products.find(items => items.id === id);
     return product;
@@ -40,7 +41,7 @@ const addToCart = (id) =>{
     //i haven't got a hang of why cart is returning undefined yet
     
      setGetProduct(()=>{
-        return {...getProduct, products: tempProducts, cart: [...getProduct.products, product]}
+        return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
         
     });
    
@@ -49,10 +50,23 @@ const addToCart = (id) =>{
 
 
 const openModal = id =>{
+    // const product = getItem(id);
+
+    // setGetProduct(()=>{
+    //     return {...getProduct, modalProduct: product, modalOpen: true}
+    // })
+
     const product = getItem(id);
 
+    let tempProducts = [...getProduct.products];
+    const index = tempProducts.indexOf(getItem(id));
+    let cartProduct = tempProducts[index];
+    cartProduct.inCart = true;
+    cartProduct.count = 1;
+    const price = cartProduct.price;
+    cartProduct.total = price;
     setGetProduct(()=>{
-        return {...getProduct, modalProduct: product, modalOpen: true}
+        return {...getProduct, modalProduct: product, modalOpen: true, products: tempProducts, cart:[...getProduct.cart, cartProduct]}
     })
 }
 const closeModal = () =>{

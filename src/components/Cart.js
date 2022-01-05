@@ -21,9 +21,9 @@ export default function Cart() {
                     return(
                         <div>
                             
-                            {addedToCart.map(item =>{
+                            {addedToCart.map((item, index) =>{
                                 return(
-                                    <div className="cart-items">
+                                    <div className="cart-items" key={index}>
 
                                     </div>
                                 )    
