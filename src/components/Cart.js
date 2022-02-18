@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProductConsumer } from '../context';
-
+import CartItems from './cartItems';
 
 
 export default function Cart() {
@@ -15,19 +15,14 @@ export default function Cart() {
                     // console.log( "value from cart", value.cart);
                     // console.log("all properties", value.products)
 
-                    const addedToCart = value.products.filter(item => item.inCart === true)
-                    console.log("added to cart ", addedToCart)
+                    const currentCartItem = value.products.filter(item => item.inCart === true)
+                    console.log("added to cart ", currentCartItem)
 
                     return(
                         <div>
-                            
-                            {addedToCart.map((item, index) =>{
-                                return(
-                                    <div className="cart-items" key={index}>
-
-                                    </div>
-                                )    
-                            })}
+                            {currentCartItem.map(items =>(
+                                <CartItems key={items.id} items={items}/>
+                            ))}
                         </div>
                     );
 

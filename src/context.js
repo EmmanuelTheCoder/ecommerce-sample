@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react';
+import React, {createContext, useState} from 'react';
 import {storeProducts, detailProduct} from './data';
 
 const ProductContext = createContext();
@@ -37,9 +37,6 @@ const addToCart = (id) =>{
     product.total = price;
 
     
-    
-    //i haven't got a hang of why cart is returning undefined yet
-    
      setGetProduct(()=>{
         return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
         
@@ -50,12 +47,6 @@ const addToCart = (id) =>{
 
 
 const openModal = id =>{
-    // const product = getItem(id);
-
-    // setGetProduct(()=>{
-    //     return {...getProduct, modalProduct: product, modalOpen: true}
-    // })
-
     const product = getItem(id);
 
     let tempProducts = [...getProduct.products];

@@ -39,7 +39,6 @@ export default function Product({product}) {
 
                                         value.addToCart(id);
                                         value.openModal(id);
-                                        console.log("values from cart", value.cart);
                                         
                                     }
                                     }
