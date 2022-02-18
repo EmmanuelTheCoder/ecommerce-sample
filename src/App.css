@@ -17,3 +17,10 @@
 }
 
 }
+
+/* cartitem.js styling */
+.cart-item{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
