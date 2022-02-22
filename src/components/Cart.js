@@ -20,7 +20,16 @@ export default function Cart() {
 
                     return(
                         <div>
+                            <div className="cart-list-header">
+                                <h1>Item</h1>
+                                <h1>Name of item</h1>
+                                <h1>price</h1>
+                                <h1>quantity</h1>
+                                <h1>remove</h1>
+                                <h1>total</h1>
+                            </div>
                             {currentCartItem.map(items =>(
+                                
                                 <CartItems key={items.id} items={items}/>
                             ))}
                         </div>

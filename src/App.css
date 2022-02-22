@@ -19,8 +19,11 @@
 }
 
 /* cartitem.js styling */
-.cart-item{
+.cart-list-header{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+.cart-list-header h1{
+  font-size: 1.5rem;
 }
