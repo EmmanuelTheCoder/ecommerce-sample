@@ -4,13 +4,13 @@ export default function CartItems({items}) {
     const {title, img, price, count, total} = items
   return (
     <div className='cartitem-container'>
-        <div>
+        <div className='cart-item-products'>
             <img src={img} alt="product" />
             <p>{title}</p>
             <p>{price}</p>
             <p>{count}</p>
             <button>remove</button>
-            <p>{total}</p>
+            <p><strong style={{textTransform: 'capitalize'}}>item total: </strong>{total}</p>
 
 
         </div>
