@@ -28,10 +28,12 @@ export default function Cart() {
                                 <h1>remove</h1>
                                 <h1>total</h1>
                             </div>
-                            {currentCartItem.map(items =>(
+                            {/* {currentCartItem.map(items =>(
                                 
                                 <CartItems key={items.id} items={items}/>
-                            ))}
+                            ))} */}
+
+                            <CartItems items={currentCartItem} />
                         </div>
                     );
 
