@@ -5,11 +5,16 @@ export default function CartItems({items}) {
   return (
     <div className='cartitem-container'>
         <div className='cart-item-products'>
-            <img src={img} alt="product" />
+            {/* <img src={img} alt="product" /> */}
+            <p>halleluyah</p>
             <p>{title}</p>
             <p>{price}</p>
-            <p>{count}</p>
-            <button>remove</button>
+            {/* <p>{count}</p> */}
+            <div className="btn-group">
+              <span>-</span>
+              <p>{count}</p>
+              <span>+</span>
+            </div>
             <p><strong style={{textTransform: 'capitalize'}}>item total: </strong>{total}</p>
 
 
