@@ -1,11 +1,13 @@
-//const {title, img, price, count, total} = items
+
 
 import '../App.css';
 
 export default function CartItems({items}) {
-    //console.log("items to be displayed", items)
-
-    const DisplayItems = () =>{
+  
+  const DisplayItems = () =>{
+      if(items.length === 0){
+        return <h1 style={{textAlign: 'center', fontSize: '1.1rem', fontStyle: 'italic'}}>Cart is currently empty</h1>
+      }
       if(items !== undefined){
 
         return items.map(item =>{
@@ -17,9 +19,8 @@ export default function CartItems({items}) {
             </div>
           )
         })
-      }else if (items.length === 0){
-        return <h1>Cart is currently empty</h1>
       }
+
 
     }
   return (
