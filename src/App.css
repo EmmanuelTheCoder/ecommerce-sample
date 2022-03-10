@@ -36,10 +36,22 @@
 .cart-product-list{
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .cart-product-list p {
-  inline-size: 70px;
-  word-wrap: break-word;
-  hyphens: manual;
+  inline-size: 80px;
+  word-break: break-all;
+  hyphens: auto;
+  text-align: center;
+}
+.cart-product-list img{
+  margin-left: 8px;
+}
+.fa-del{
+  width: 20px;
+  height: 18px;
+}
+.cart-product-list p:last-child{
+    text-align: end;
 }

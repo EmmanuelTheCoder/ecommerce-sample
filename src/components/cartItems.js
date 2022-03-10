@@ -31,8 +31,11 @@ export default function CartItems({items}) {
                 <p>{title}</p>
                 <p> <strong>{price}</strong></p>
                 <p>{count}</p>
-                <button>del</button>
-                <p><strong>total price:</strong>{total}</p>
+                <img src="https://img.icons8.com/ios-glyphs/60/fa314a/filled-trash.png"
+                className='fa-del'
+                />
+                <p><strong></strong>{total}</p>
+                {/* <a href="https://icons8.com/icon/67884/delete">Delete icon by Icons8</a> */}
             </div>
           )
         })
