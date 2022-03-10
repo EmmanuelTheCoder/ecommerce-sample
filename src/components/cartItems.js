@@ -30,11 +30,14 @@ export default function CartItems({items}) {
                 <img src={img} alt="cart product" className="cart-product-img"/>
                 <p>{title}</p>
                 <p> <strong>{price}</strong></p>
-                <p>{count}</p>
+                <p className='btn'><strong className='toggle-count'>-</strong>{count} 
+                <strong className='toggle-count'>+</strong>
+                </p>
                 <img src="https://img.icons8.com/ios-glyphs/60/fa314a/filled-trash.png"
                 className='fa-del'
+                alt='delete'
                 />
-                <p><strong></strong>{total}</p>
+                <p><strong></strong>${total}</p>
                 {/* <a href="https://icons8.com/icon/67884/delete">Delete icon by Icons8</a> */}
             </div>
           )
