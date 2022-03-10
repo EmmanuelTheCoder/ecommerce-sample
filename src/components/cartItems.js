@@ -26,8 +26,13 @@ export default function CartItems({items}) {
          
           console.log("items to be displayed", item)
           return(
-            <div key={item.id}>
-                <img src={img} alt="cart product" />
+            <div key={item.id} className="cart-product-list">
+                <img src={img} alt="cart product" className="cart-product-img"/>
+                <p>{title}</p>
+                <p> <strong>{price}</strong></p>
+                <p>{count}</p>
+                <button>del</button>
+                <p><strong>total price:</strong>{total}</p>
             </div>
           )
         })

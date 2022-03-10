@@ -18,10 +18,10 @@
 
 }
 
-/* cart.js styling */
+/* cartItem.js styling */
 .cart-list-header{
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
+  justify-content: space-between;
   
 }
 .cart-list-header h1{
@@ -29,8 +29,17 @@
 }
 
 /*  carItem.js styling*/
-.cart-item-products{
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  
+.cart-product-img{
+  width: 50px;
+  height: 40px;
+}
+.cart-product-list{
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-product-list p {
+  inline-size: 70px;
+  word-wrap: break-word;
+  hyphens: manual;
 }
