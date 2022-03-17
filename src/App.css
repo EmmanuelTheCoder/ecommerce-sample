@@ -33,19 +33,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem 0;
 }
 .cart-product-img{
   height: 5rem;
   width: 7rem;
   position: absolute;
-  top: 2rem;
+  top: 5rem;
   left: center;
+  transform: translate(-50px, 2rem);
 }
 .cart-list-header{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 8rem;
   
 }
 
