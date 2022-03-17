@@ -23,16 +23,34 @@
   align-items: center;
   justify-content: center;
   margin-top: 5rem;
+  transform: translate(40px);
 }
 .sub-cart-list-header h1{
   font-size: 1.2rem;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
+  
+  
+  
   
 }
 .cart-product-list{
   display: flex;
   flex-direction: column;
   align-items: center;
+
+}
+.cart-product-list p{
+  padding: 1.2rem 0;
+  margin-left: -7rem;
+  
+}
+
+.cart-list-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8rem;
+  
 }
 .cart-product-img{
   height: 5rem;
@@ -41,13 +59,6 @@
   top: 5rem;
   left: center;
   transform: translate(-50px, 2rem);
-}
-.cart-list-header{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 8rem;
-  
 }
 
 /* the below code is commented out */
