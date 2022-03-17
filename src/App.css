@@ -17,23 +17,37 @@
 }
 }
 
-.cartitem-container{
-  height: 100vh;
-  
-}
-.cart-list-header{
+.sub-cart-list-header{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
 }
-.display-none{
-  display: none;
-}
-.cart-list-header h1{
+.sub-cart-list-header h1{
   font-size: 1.2rem;
-
+  padding: 1rem 0;
+  
 }
-
+.cart-product-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+}
+.cart-product-img{
+  height: 5rem;
+  width: 7rem;
+  position: absolute;
+  top: 2rem;
+  left: center;
+}
+.cart-list-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
 
 /* the below code is commented out */
 
