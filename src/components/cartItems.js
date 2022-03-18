@@ -25,7 +25,7 @@ export default function CartItems({items}) {
               <div key={item.id} className="cart-product-list">
                   <img src={img} alt="cart product" className="cart-product-img"/>
                   <p>{title}</p>
-                  <p> <strong>{price}</strong></p>
+                  <p> {price}</p>
                   <p className='btn'><strong className='toggle-count'>-</strong>{count} 
                   <strong className='toggle-count'>+</strong>
                   </p>

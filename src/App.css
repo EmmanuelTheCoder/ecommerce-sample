@@ -27,23 +27,19 @@
 }
 .sub-cart-list-header h1{
   font-size: 1.2rem;
-  padding: 1.5rem 0;
-  
-  
-  
-  
+  padding: 1.4rem 0;
+  padding-bottom: 5rem;
 }
 .cart-product-list{
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 .cart-product-list p{
-  padding: 1.2rem 0;
-  margin-left: -7rem;
   
+  margin-left: -7rem;
 }
+
 
 .cart-list-header{
   display: flex;
