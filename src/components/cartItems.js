@@ -27,7 +27,7 @@ export default function CartItems({items}) {
                   <p>{title}</p>
                   <p> ${price}</p>
                   <p className='btn'><strong className='toggle-count'>-</strong>{count} 
-                  <strong className='toggle-count'>+</strong>
+                    <strong className='toggle-count'>+</strong>
                   </p>
                   <img src="https://img.icons8.com/ios-glyphs/30/fa314a/filled-trash.png"
                   className='fa-del'
