@@ -1,6 +1,11 @@
+import { useContext } from 'react';
+import {ProductContext} from '../context'
 import '../App.css';
 
 export default function CartItems({items}) {
+
+  const valve = useContext(ProductContext)
+  console.log("valve", valve)
 
   const ListHeader = () =>{
     return(
@@ -20,7 +25,7 @@ export default function CartItems({items}) {
 
         {items !== undefined ?
           items.map(item => {
-            const {title, img, price, count, total} = item
+            const {title, img, price, count, total, id} = item
             return(
               <div key={item.id} className="cart-product-list">
                   <img src={img} alt="cart product" className="cart-product-img"/>
@@ -29,7 +34,7 @@ export default function CartItems({items}) {
                   <div className="control-btn">
                     <strong>-</strong>
                     <p>{count}</p>
-                    <strong>+</strong>
+                    <strong onClick={()=>valve.incrementQuantity(id)}>+</strong>
 
                   </div>
                   <img src="https://img.icons8.com/ios-glyphs/30/fa314a/filled-trash.png"

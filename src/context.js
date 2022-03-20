@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {storeProducts, detailProduct} from './data';
 
-const ProductContext = createContext();
+export const ProductContext = createContext();
 
 
 const ProductProvider = ({children}) => {
@@ -65,13 +65,26 @@ const closeModal = () =>{
         return {...getProduct, modalOpen: false}
     })
 }
+const incrementQuantity = (id) =>{
+    let tempProducts = [...getProduct.products];
+    const index = tempProducts.indexOf(getItem(id));
+    const product = tempProducts[index];
+
+    product.count = product.count + 1
+    product.total = product.price * product.count
+
+    setGetProduct(()=>{
+        return {...getProduct, cart: [...getProduct.cart, product]}
+    })
+}
     return(
        <ProductContext.Provider value={{
            ...getProduct,
            handleDetail: handleDetail,
            addToCart: addToCart,
            openModal: openModal,
-           closeModal: closeModal
+           closeModal: closeModal,
+           incrementQuantity: incrementQuantity
            
        }} >
            {children}
