@@ -26,9 +26,12 @@ export default function CartItems({items}) {
                   <img src={img} alt="cart product" className="cart-product-img"/>
                   <p>{title}</p>
                   <p> ${price}</p>
-                  <p className='btn'><strong className='toggle-count'>-</strong>{count} 
-                    <strong className='toggle-count'>+</strong>
-                  </p>
+                  <div className="control-btn">
+                    <strong>-</strong>
+                    <p>{count}</p>
+                    <strong>+</strong>
+
+                  </div>
                   <img src="https://img.icons8.com/ios-glyphs/30/fa314a/filled-trash.png"
                   className='fa-del'
                   alt='delete'

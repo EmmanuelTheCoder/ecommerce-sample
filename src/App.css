@@ -20,10 +20,13 @@
 .sub-cart-list-header{
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .cart-product-list{
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 1rem 0;
 }
 .cart-product-img {
   width: 5rem;
@@ -32,6 +35,31 @@
 .sub-cart-list-header h1{
   font-size: 1.2rem;
 }
+.fa-del{
+  width: 20px;
+  height: 20px;
+  margin-top: .2rem;
+}
+.control-btn{
+  display: flex;
+  justify-content: center;
+}
+.control-btn strong{
+  border: 1px solid black;
+  height: fit-content;
+  margin: 0 .1rem;
+  padding: 0 .1rem;
+  cursor: pointer;
+  background-color: rgb(160, 158, 158);
+  outline: none;
+
+}
+
+.control-btn strong:hover{
+  background: rgb(43, 39, 39);
+  color: #fff
+}
+
 
 /* .sub-cart-list-header{
   display: flex;
