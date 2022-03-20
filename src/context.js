@@ -66,14 +66,39 @@ const closeModal = () =>{
     })
 }
 const incrementQuantity = (id) =>{
-    let tempProducts = [...getProduct.products];
-    const index = tempProducts.indexOf(getItem(id));
-    const product = tempProducts[index];
+    let tempProduct = [...getProduct.products]
+    const index = tempProduct.indexOf(getItem(id))
+    const product = tempProduct[index]
 
     product.count = product.count + 1
     product.total = product.price * product.count
 
     setGetProduct(()=>{
+        return {...getProduct, cart: [...getProduct.cart, product]}
+    })
+}
+
+const deleteFromCart = (id) =>{
+    const tempProduct = [...getProduct.products]
+
+    const removeItem = getProduct.cart.filter(prod => prod.id !== id)
+
+    setGetProduct(() =>{
+        return {...getProduct, cart: [...removeItem]}
+    })
+
+    console.log("item is removed", removeItem)
+}
+
+const decrementQuantity = (id) =>{
+    const tempProduct = [...getProduct.products]
+    const index = tempProduct.indexOf(getItem(id));
+    const product = tempProduct[index];
+
+    product.count = product.count - 1
+    product.total = product.price * product.count
+
+    setGetProduct(() =>{
         return {...getProduct, cart: [...getProduct.cart, product]}
     })
 }
@@ -84,7 +109,9 @@ const incrementQuantity = (id) =>{
            addToCart: addToCart,
            openModal: openModal,
            closeModal: closeModal,
-           incrementQuantity: incrementQuantity
+           incrementQuantity: incrementQuantity,
+           decrementQuantity: decrementQuantity,
+           deleteFromCart: deleteFromCart
            
        }} >
            {children}

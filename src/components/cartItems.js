@@ -4,8 +4,8 @@ import '../App.css';
 
 export default function CartItems({items}) {
 
-  const valve = useContext(ProductContext)
-  console.log("valve", valve)
+  const quantity = useContext(ProductContext)
+  console.log("valve", quantity)
 
   const ListHeader = () =>{
     return(
@@ -32,14 +32,15 @@ export default function CartItems({items}) {
                   <p>{title}</p>
                   <p> ${price}</p>
                   <div className="control-btn">
-                    <strong>-</strong>
+                    <strong onClick={()=>quantity.decrementQuantity(id)}>-</strong>
                     <p>{count}</p>
-                    <strong onClick={()=>valve.incrementQuantity(id)}>+</strong>
+                    <strong onClick={()=>quantity.incrementQuantity(id)}>+</strong>
 
                   </div>
                   <img src="https://img.icons8.com/ios-glyphs/30/fa314a/filled-trash.png"
                   className='fa-del'
                   alt='delete'
+                  onClick={()=>quantity.deleteFromCart(id)}
                   />
                   <p><strong></strong>${total}</p>
                   {/* <a href="https://icons8.com/icon/67884/delete">Delete icon by Icons8</a> */}
