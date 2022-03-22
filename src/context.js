@@ -79,15 +79,14 @@ const incrementQuantity = (id) =>{
 }
 
 const deleteFromCart = (id) =>{
-    const tempProduct = [...getProduct.products]
-
     const removeItem = getProduct.cart.filter(prod => prod.id !== id)
 
     setGetProduct(() =>{
-        return {...getProduct, cart: [...removeItem]}
-    })
+        return {...getProduct, cart: [...removeItem] }
+    });
 
-    console.log("item is removed", removeItem)
+    console.log("remove item", removeItem)
+
 }
 
 const decrementQuantity = (id) =>{
