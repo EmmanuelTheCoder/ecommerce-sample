@@ -5,7 +5,7 @@ import '../App.css';
 export default function CartItems({items}) {
 
   const quantity = useContext(ProductContext)
-  console.log("valve", quantity)
+  //console.log("valve", quantity)
 
   const ListHeader = () =>{
     return(

@@ -11,16 +11,17 @@ export default function Cart() {
                 {value =>{
 
                     const {cart} = value;
-                    console.log("destructuring cart", cart)
+                    console.log("cart from cart", cart);
+                    
                     // console.log( "value from cart", value.cart);
                     // console.log("all properties", value.products)
 
-                    const currentCartItem = value.products.filter(item => item.inCart === true)
-                    console.log("added to cart ", currentCartItem)
+                    //const currentCartItem = value.products.filter(item => item.inCart === true)
+                
 
                     return(
                         <div>
-                            <CartItems items={currentCartItem} />
+                            <CartItems items={cart} />
                         </div>
                     );
 

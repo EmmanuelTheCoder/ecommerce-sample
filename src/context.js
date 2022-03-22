@@ -80,7 +80,7 @@ const incrementQuantity = (id) =>{
 
 const deleteFromCart = (id) =>{
     const removeItem = getProduct.cart.filter(prod => prod.id !== id)
-
+    
     setGetProduct(() =>{
         return {...getProduct, cart: [...removeItem] }
     });
@@ -94,8 +94,16 @@ const decrementQuantity = (id) =>{
     const index = tempProduct.indexOf(getItem(id));
     const product = tempProduct[index];
 
-    product.count = product.count - 1
-    product.total = product.price * product.count
+    if(product.count > 1){
+
+        product.count = product.count - 1
+        product.total = product.price * product.count
+    }else if(product.count < 1){
+        deleteFromCart(id)
+    }else{
+
+    }
+
 
     setGetProduct(() =>{
         return {...getProduct, cart: [...getProduct.cart, product]}
