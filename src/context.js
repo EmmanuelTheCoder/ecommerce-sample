@@ -12,7 +12,7 @@ const [getProduct, setGetProduct] = useState({
     cart: [],
     modalOpen: false,
     modalProduct: detailProduct,
-    
+    sumTotal: 0   
     
 });
 
@@ -20,6 +20,7 @@ const getItem = (id) =>{
     const product = getProduct.products.find(items => items.id === id);
     return product;
 }
+
 
 const handleDetail = (id) =>{
     const product = getItem(id);
@@ -38,7 +39,7 @@ const addToCart = (id) =>{
 
     
      setGetProduct(()=>{
-        return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
+        return {...getProduct, products: tempProducts, sumTotal: price, cart: [...getProduct.cart, product]}
         
     });
    
@@ -69,21 +70,42 @@ const incrementQuantity = (id) =>{
     let tempProduct = [...getProduct.products]
     const index = tempProduct.indexOf(getItem(id))
     const product = tempProduct[index]
-
+    
     product.count = product.count + 1
     product.total = product.price * product.count
+    
+    let newArray = []
+    //newArray = [...newArray, product.total]
+    const sumValue = getProduct.cart.map(val =>{
+        const total = val.total;
+        newArray = [...newArray, total]
 
-    setGetProduct(()=>{
-        return {...getProduct, cart: [...getProduct.cart, product]}
+        const sumTotal = newArray.reduce((a,b) => a + b)
+
+        console.log("sum total", sumTotal)
+        return sumTotal
     })
+    console.log("sum value", sumValue)
+        setGetProduct(()=>{
+            return {...getProduct, cart: [...getProduct.cart]}
+        })
+    
 }
 
 const deleteFromCart = (id) =>{
-    const removeItem = getProduct.cart.filter(prod => prod.id !== id)
+    const removeItem = getProduct.cart.filter(prod => prod.id !== id);
+
+    const tempProduct = [...getProduct.cart]
+    const index = tempProduct.indexOf(getItem(id))
+    const product = tempProduct[index];
+
+    product.inCart = false;
+
     
     setGetProduct(() =>{
         return {...getProduct, cart: [...removeItem] }
     });
+
 
     console.log("remove item", removeItem)
 
@@ -94,20 +116,33 @@ const decrementQuantity = (id) =>{
     const index = tempProduct.indexOf(getItem(id));
     const product = tempProduct[index];
 
-    if(product.count > 1){
-
+  
+        
         product.count = product.count - 1
-        product.total = product.price * product.count
-    }else if(product.count < 1){
-        deleteFromCart(id)
-    }else{
+        product.total = product.price * product.count;
+        setGetProduct(() =>{
+            return {...getProduct, cart: [...getProduct.cart]}
+        })
+    
+    
+    if(product.count === 0){
 
+        deleteFromCart(id)
     }
 
+    // if(product.count === 0){
+    //     deleteFromCart(id)
+    // }
 
-    setGetProduct(() =>{
-        return {...getProduct, cart: [...getProduct.cart, product]}
-    })
+    //https://lornajane.net/resource/what-is-devrel
+
+
+    
+
+
+    // setGetProduct(() =>{
+    //     return {...getProduct, cart: [...getProduct.cart, product]}
+    // })
 }
     return(
        <ProductContext.Provider value={{
@@ -118,7 +153,7 @@ const decrementQuantity = (id) =>{
            closeModal: closeModal,
            incrementQuantity: incrementQuantity,
            decrementQuantity: decrementQuantity,
-           deleteFromCart: deleteFromCart
+           //deleteFromCart: deleteFromCart
            
        }} >
            {children}

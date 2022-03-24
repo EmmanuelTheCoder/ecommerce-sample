@@ -21,7 +21,7 @@ export default function Cart() {
 
                     return(
                         <div>
-                            <CartItems items={cart} />
+                            <CartItems items={cart}/>
                         </div>
                     );
 
