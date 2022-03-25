@@ -36,7 +36,8 @@ export default function Details(props) {
                                         Back to products
                                     </button>
                                 </Link> 
-                                <button type="button" className="add-to-cart" disabled={inCart ? true : false} onClick={()=>{
+                                <button type="button" className="add-to-cart"
+                                 disabled={inCart ? true : false} onClick={()=>{
                                     
                                     value.addToCart(id);
                                     value.openModal(id)

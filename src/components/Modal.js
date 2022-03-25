@@ -35,7 +35,9 @@ export default function Modal(props) {
                                             </ButtonContainer>
                                         </Link>
                                         <Link to="/cart">
-                                            <CartBtn onClick={()=>closeModal()}>
+                                            <CartBtn onClick={()=>{
+                                                return closeModal();
+                                            }}>
                                                 go to cart
                                             </CartBtn>
                                         </Link>

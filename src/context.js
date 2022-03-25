@@ -12,7 +12,7 @@ const [getProduct, setGetProduct] = useState({
     cart: [],
     modalOpen: false,
     modalProduct: detailProduct,
-    sumTotal: 0   
+    sumTotal: 0  
     
 });
 
@@ -38,12 +38,26 @@ const addToCart = (id) =>{
     product.total = price;
 
     
-     setGetProduct(()=>{
-        return {...getProduct, products: tempProducts, sumTotal: price, cart: [...getProduct.cart, product]}
+    setGetProduct(()=>{
+        return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
         
     });
+
    
   
+}
+
+const CartTotal = () =>{
+    const sumValue = [...getProduct.cart]
+    const arrayOfCartTotal = sumValue.map(val => val.total)
+    const sum = arrayOfCartTotal.reduce((a,b) => a + b, 0)
+
+    setGetProduct(() =>{
+        return {...getProduct, sumTotal: sum}
+    })
+
+    console.log("from cart total", getProduct.sumTotal)
+
 }
 
 
@@ -101,10 +115,10 @@ const incrementQuantity = (id) =>{
     
     const sumValue = [...getProduct.cart]
     const arrayOfCartTotal = sumValue.map(val => val.total)
-    const sum = arrayOfCartTotal.reduce((a,b) => a + b)
+    const sum = arrayOfCartTotal.reduce((a,b) => a + b, 0)
     console.log("summation", sum)
     setGetProduct(()=>{
-        return {...getProduct, sumTotal: sum, cart: [...getProduct.cart]}
+        return {...getProduct, cart: [...getProduct.cart], sumTotal: sum}
     });
     
     console.log("sum from state", getProduct.sumTotal)
@@ -172,7 +186,8 @@ const decrementQuantity = (id) =>{
            closeModal: closeModal,
            incrementQuantity: incrementQuantity,
            decrementQuantity: decrementQuantity,
-           //deleteFromCart: deleteFromCart
+           deleteFromCart: deleteFromCart,
+           CartTotal: CartTotal
            
        }} >
            {children}
