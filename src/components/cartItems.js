@@ -5,6 +5,7 @@ import '../App.css';
 export default function CartItems({items}) {
 
   const quantity = useContext(ProductContext)
+  const {sumTotal} = quantity
   //console.log("valve", quantity)
 
   const ListHeader = () =>{
@@ -89,6 +90,10 @@ export default function CartItems({items}) {
   return (
     <div className='cartitem-container'>
       {items.length > 0 ? <ListHeader /> : ""}
+
+      <div className="cart-sum-total">
+        {typeof sumTotal !== 'undefined' ? <p>{sumTotal} </p> : ""}
+      </div>
       
     </div>
   );
