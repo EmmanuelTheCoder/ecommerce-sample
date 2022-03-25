@@ -68,21 +68,21 @@ const closeModal = () =>{
 }
 
 
-const copyCart =[...getProduct.cart]
-let newArray = [];
+// const copyCart =[...getProduct.cart]
+// let newArray = [];
 
-copyCart.map(val => {
-    let total = val.total;
-    newArray = [...newArray, total]
-    const sumValue = copyCart.reduce((a,b) => a + b);
+// copyCart.map(val => {
+//     let total = val.total;
+//     newArray = [...newArray, total]
+//     const sumValue = copyCart.reduce((a,b) => a + b);
 
-    setGetProduct(() =>{
-        return {...getProduct, sumTotal: sumValue}
-    })
-    return sumValue
-});
+//     setGetProduct(() =>{
+//         return {...getProduct, sumTotal: sumValue}
+//     })
+//     return sumValue
+// });
 
-console.log("copy cart", getProduct.sumTotal)
+// console.log("copy cart", getProduct.sumTotal)
 
 
 
@@ -96,25 +96,19 @@ const incrementQuantity = (id) =>{
     product.total = product.price * product.count
     
     
-    // let newArray = []
-    // const sumValue = [...getProduct.cart]
-    // sumValue.map(val =>{
-    //     const total = val.total;
-    //     newArray = [...newArray, total]
-
-    //     const sumTotal = newArray.reduce((a,b) => a + b);
-    //     console.log("summation", sumTotal);
-        
-    //     return sumTotal;
-    // })
     
     
+    
+    const sumValue = [...getProduct.cart]
+    const arrayOfCartTotal = sumValue.map(val => val.total)
+    const sum = arrayOfCartTotal.reduce((a,b) => a + b)
+    console.log("summation", sum)
     setGetProduct(()=>{
-        return {...getProduct,  cart: [...getProduct.cart]}
-    })
-
-    console.log("sum value", getProduct.sumTotal)
+        return {...getProduct, sumTotal: sum, cart: [...getProduct.cart]}
+    });
     
+    console.log("sum from state", getProduct.sumTotal)
+
 }
 
 const deleteFromCart = (id) =>{
