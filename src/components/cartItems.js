@@ -6,7 +6,7 @@ export default function CartItems({items}) {
 
   const quantity = useContext(ProductContext)
   const {sumTotal} = quantity
-  //console.log("valve", quantity)
+
 
   const ListHeader = () =>{
     return(
@@ -55,44 +55,23 @@ export default function CartItems({items}) {
     
     )
   }
-  
-  const DisplayItems = () =>{
-      if(items.length === 0){
-        return <h1 style={{textAlign: 'center', fontSize: '2.5rem', fontFamily: 'Montserrat', fontStyle: 'italic'}}>Cart is currently empty</h1>
-      }
-      if(items !== undefined){
 
-        return items.map(item =>{
-         const {title, img, price, count, total} = item
-         
-          console.log("items to be displayed", item)
-          return(
-            <div key={item.id} className="cart-product-list">
-                <img src={img} alt="cart product" className="cart-product-img"/>
-                <p>{title}</p>
-                <p> <strong>{price}</strong></p>
-                <p className='btn'><strong className='toggle-count'>-</strong>{count} 
-                <strong className='toggle-count'>+</strong>
-                </p>
-                <img src="https://img.icons8.com/ios-glyphs/30/fa314a/filled-trash.png"
-                className='fa-del'
-                alt='delete'
-                />
-                <p><strong></strong>${total}</p>
-                {/* <a href="https://icons8.com/icon/67884/delete">Delete icon by Icons8</a> */}
-            </div>
-          )
-        })
-      }
-
-
+  const CartTotal = () =>{
+    if(typeof sumTotal !== undefined && sumTotal !== 0){
+      return <p className="cart-total-amount">${sumTotal}</p>
+    }else{
+      return null
     }
+  }
+  
+  
   return (
     <div className='cartitem-container'>
       {items.length > 0 ? <ListHeader /> : ""}
 
       <div className="cart-sum-total">
-        {typeof sumTotal !== 'undefined' ? <p>{sumTotal} </p> : ""}
+       <h3>Sum Total:</h3>
+        <CartTotal />
       </div>
       
     </div>

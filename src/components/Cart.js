@@ -9,15 +9,7 @@ export default function Cart() {
         <div>
            <ProductConsumer >
                 {value =>{
-
                     const {cart} = value;
-                    
-                    // console.log( "value from cart", value.cart);
-                    // console.log("all properties", value.products)
-
-                    //const currentCartItem = value.products.filter(item => item.inCart === true)
-                
-
                     return(
                         <div>
                             <CartItems items={cart}/>
