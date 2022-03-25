@@ -5,9 +5,24 @@ import '../App.css';
 export default function CartItems({items}) {
 
   const quantity = useContext(ProductContext)
-  const {sumTotal} = quantity
+  const {sumTotal, cart} = quantity
 
+  const CartTotal = () =>{
+    if(typeof sumTotal !== undefined && sumTotal !== 0){
+      return <p className="cart-total-amount">${sumTotal}</p>
 
+    }else{
+      return null
+    }
+  }
+
+  const CartTotalOrEmpty = () =>{
+    if(cart.length === 0){
+      return <h3 style={{textAlign: 'center', fontStyle: 'italic'}}>Cart is currently empty</h3>
+    }else{
+      return <h3 style={{textAlign: 'right', paddingRight: '1rem', paddingTop: '3rem'}}>Sum Total:</h3>
+    }
+  }
   const ListHeader = () =>{
     return(
       <div className="cart-list-header">
@@ -55,22 +70,13 @@ export default function CartItems({items}) {
     
     )
   }
-
-  const CartTotal = () =>{
-    if(typeof sumTotal !== undefined && sumTotal !== 0){
-      return <p className="cart-total-amount">${sumTotal}</p>
-    }else{
-      return null
-    }
-  }
-  
-  
+ 
   return (
     <div className='cartitem-container'>
       {items.length > 0 ? <ListHeader /> : ""}
 
-      <div className="cart-sum-total">
-       <h3>Sum Total:</h3>
+      <div>
+        <CartTotalOrEmpty />
         <CartTotal />
       </div>
       
