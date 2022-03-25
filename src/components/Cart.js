@@ -11,7 +11,6 @@ export default function Cart() {
                 {value =>{
 
                     const {cart} = value;
-                    console.log("cart from cart", cart);
                     
                     // console.log( "value from cart", value.cart);
                     // console.log("all properties", value.products)
