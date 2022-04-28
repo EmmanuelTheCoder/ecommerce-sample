@@ -1,10 +1,49 @@
-import React, {createContext, useState} from 'react';
-import {storeProducts, detailProduct} from './data';
+import React, {createContext, useEffect, useState} from 'react';
+//import {storeProducts, detailProduct} from './data';
 
 export const ProductContext = createContext();
 
 
 const ProductProvider = ({children}) => {
+
+const [serverProduct, setServerProduct] = useState({
+    storeProducts: [],
+    detailProduct: {}
+})
+
+// const {storeProducts, detailProduct} = serverProduct;
+
+// console.log("destructured store product", storeProducts)
+
+const fetchDataFromServer = () => {
+    fetch("http://localhost:8000/data")
+    .then(res => res.json())
+    .then(data => {
+        setServerProduct(() =>{
+            return {storeProducts: data.storeProducts, detailProduct: data.detailProduct}
+        })
+        console.log("data", data.storeProducts)
+    })
+}
+useEffect(() =>{
+    // (async ()=>{
+    //     const data = await fetch("http://localhost:8000/data");
+    //     const response = await data.json()
+
+    //     console.log("response from data", response);
+    //     setServerProduct(() =>{
+    //         return {storeProducts: response.storeProducts, detailProduct: response.detailProduct}
+    //     })
+    // })();
+    
+    fetchDataFromServer()
+    
+}, []);
+console.log("serverproduct", serverProduct.storeProducts)
+
+
+const detailProduct = serverProduct.detailProduct;
+const storeProducts = serverProduct.storeProducts;
 const [getProduct, setGetProduct] = useState({
 
     products: storeProducts,
@@ -15,6 +54,7 @@ const [getProduct, setGetProduct] = useState({
     sumTotal: 0
     
 });
+
 
 
 const getItem = (id) =>{
