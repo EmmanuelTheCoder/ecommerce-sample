@@ -1,50 +1,67 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useCallback, useEffect, useState} from 'react';
 //import {storeProducts, detailProduct} from './data';
 
 export const ProductContext = createContext();
 
 
 const ProductProvider = ({children}) => {
-    const [serverProduct, setServerProduct] = useState({
-            storeProducts: [],
-            detailProduct: {}
-    });
     
+    const [getProduct, setGetProduct] = useState({
+    
+        products: [],
+        detailProduct: {},
+        cart: [],
+        modalOpen: false,
+        modalProduct: {},
+        sumTotal: 0
+        
+    });
+
     useEffect(() =>{
-        fetch("http://localhost:8000/data")
-        .then(res => res.json())
-        .then(data => {
-            // setGetProduct(() => {
-            //     return { ...getProduct, products: data.storeProducts, detailProduct: data.detailProduct, modalProduct: data.detailProduct}
-            // })
-            setServerProduct(() =>{
-                return {storeProducts: data.storeProducts, detailProduct: data.detailProduct }
-            })
-            console.log("data", data.storeProducts)
-        })
+        // fetch("http://localhost:8000/data")
+        // .then(res => res.json())
+        // .then(data => {
+        //     setGetProduct(() => {
+        //         return {products: data.storeProducts, 
+        //             detailProduct: data.detailProduct, modalProduct: 
+        //             data.detailProduct,
+        //             cart: [],
+        //             sumTotal: 0,
+        //             modalOpen: false
+        //         }
+        //     })
+        //     console.log("data", data.storeProducts)
+        // })
+
+       fetchDataFromServer()
+
+       
 
         
-    }, []);
+    }, [fetchDataFromServer]);
     
-    const detailProduct = serverProduct.detailProduct;
-    const storeProducts = serverProduct.storeProducts;
-    console.log("serverproduct", storeProducts)
     
-const [getProduct, setGetProduct] = useState({
+ 
 
-    products: storeProducts,
-    detailProduct: detailProduct,
-    cart: [],
-    modalOpen: false,
-    modalProduct: detailProduct,
-    sumTotal: 0
-    
-});
-
+const fetchDataFromServer = () => {
+    fetch("http://localhost:8000/data")
+    .then(res => res.json())
+    .then(data => {
+        setGetProduct(() => {
+            return {products: data.storeProducts, 
+                detailProduct: data.detailProduct, modalProduct: 
+                data.detailProduct,
+                cart: [],
+                sumTotal: 0,
+                modalOpen: false
+            }
+        })
+       
+        
+        console.log("data", getProduct.products)
+    })
+}
    
-
-
-
 
 
 const getItem = (id) =>{
