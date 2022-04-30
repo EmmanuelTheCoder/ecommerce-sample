@@ -5,55 +5,53 @@ export const ProductContext = createContext();
 
 
 const ProductProvider = ({children}) => {
+    const [getProduct, setGetProduct] = useState({
+    
+        products: [],
+        detailProduct: {},
+        cart: [],
+        modalOpen: false,
+        modalProduct: {},
+        sumTotal: 0
+        
+    });
 
-const [serverProduct, setServerProduct] = useState({
-    storeProducts: [],
-    detailProduct: {}
-})
+ useEffect(() =>{
+        fetch("http://localhost:8000/data")
+        .then(res => res.json())
+        .then(data => {
+            setGetProduct(() => {
+                return { ...getProduct, products: data.storeProducts, detailProduct: data.detailProduct, modalProduct: data.detailProduct}
+            })
+            console.log("data", data.storeProducts)
+        })
 
-// const {storeProducts, detailProduct} = serverProduct;
+        
+}, []);
 
-// console.log("destructured store product", storeProducts)
+
+// const [serverProduct, setServerProduct] = useState({
+//     storeProducts: "",
+//     detailProduct: ""
+// });
 
 const fetchDataFromServer = () => {
     fetch("http://localhost:8000/data")
     .then(res => res.json())
     .then(data => {
-        setServerProduct(() =>{
-            return {storeProducts: data.storeProducts, detailProduct: data.detailProduct}
-        })
-        console.log("data", data.storeProducts)
+        // setServerProduct(() =>{
+        //     return {storeProducts: data.storeProducts, detailProduct: data.detailProduct}
+        // })
+        
+        //console.log("data", data.storeProducts)
     })
 }
-useEffect(() =>{
-    // (async ()=>{
-    //     const data = await fetch("http://localhost:8000/data");
-    //     const response = await data.json()
-
-    //     console.log("response from data", response);
-    //     setServerProduct(() =>{
-    //         return {storeProducts: response.storeProducts, detailProduct: response.detailProduct}
-    //     })
-    // })();
-    
-    fetchDataFromServer()
-    
-}, []);
-console.log("serverproduct", serverProduct.storeProducts)
+   
+// const detailProduct = serverProduct.detailProduct;
+// const storeProducts = serverProduct.storeProducts;
+// console.log("serverproduct", storeProducts)
 
 
-const detailProduct = serverProduct.detailProduct;
-const storeProducts = serverProduct.storeProducts;
-const [getProduct, setGetProduct] = useState({
-
-    products: storeProducts,
-    detailProduct: detailProduct,
-    cart: [],
-    modalOpen: false,
-    modalProduct: detailProduct,
-    sumTotal: 0
-    
-});
 
 
 
