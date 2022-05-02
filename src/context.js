@@ -17,33 +17,8 @@ const ProductProvider = ({children}) => {
         
     });
 
-    useEffect(() =>{
-        // fetch("http://localhost:8000/data")
-        // .then(res => res.json())
-        // .then(data => {
-        //     setGetProduct(() => {
-        //         return {products: data.storeProducts, 
-        //             detailProduct: data.detailProduct, modalProduct: 
-        //             data.detailProduct,
-        //             cart: [],
-        //             sumTotal: 0,
-        //             modalOpen: false
-        //         }
-        //     })
-        //     console.log("data", data.storeProducts)
-        // })
+const fetchDataFromServer = useCallback(()=>{
 
-       fetchDataFromServer()
-
-       
-
-        
-    }, [fetchDataFromServer]);
-    
-    
- 
-
-const fetchDataFromServer = () => {
     fetch("http://localhost:8000/data")
     .then(res => res.json())
     .then(data => {
@@ -58,9 +33,15 @@ const fetchDataFromServer = () => {
         })
        
         
-        console.log("data", getProduct.products)
+       
     })
-}
+},[])
+
+useEffect(() =>{
+        
+    fetchDataFromServer()
+     
+ }, [fetchDataFromServer]);
    
 
 
