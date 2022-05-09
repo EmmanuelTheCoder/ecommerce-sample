@@ -48,10 +48,10 @@ useEffect(() =>{
  //send cart items to server
 
  useEffect(() =>{
-     sendCartItemToServer()
+     retrieveIpFromServer()
  }, [])
 
- const sendCartItemToServer = () =>{
+ const retrieveIpFromServer = () =>{
      fetch("http://localhost:8000/users")
      .then(res => res.json())
      .then(data => {
@@ -61,8 +61,20 @@ useEffect(() =>{
 
 
  }
-//  sendCartItemToServer()
- console.log("checking server response", ip)
+
+ const sendCartItemToServer = () => {
+    fetch("http://localhost:8000/cart", {
+        method: 'POST',
+        headers:{
+            'Accept': 'text/html',
+            'Content-Type': 'application/json'
+        },
+        body:{
+            cartItem: getProduct.cart
+        }
+        .then(res => console.log("reply from post", res))
+    });
+ }
 
 const getItem = (id) =>{
     const product = getProduct.products.find(items => items.id === id);
@@ -91,6 +103,7 @@ const addToCart = (id) =>{
         
     });
 
+    sendCartItemToServer()
    
   
 }
