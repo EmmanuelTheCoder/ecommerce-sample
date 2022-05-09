@@ -17,6 +17,7 @@ const ProductProvider = ({children}) => {
         
     });
 
+    const [ip, setIp] = useState({})
 const fetchDataFromServer = useCallback(()=>{
 
     fetch("http://localhost:8000/data")
@@ -44,6 +45,24 @@ useEffect(() =>{
  }, [fetchDataFromServer]);
    
 
+ //send cart items to server
+
+ useEffect(() =>{
+     sendCartItemToServer()
+ }, [])
+
+ const sendCartItemToServer = () =>{
+     fetch("http://localhost:8000/users")
+     .then(res => res.json())
+     .then(data => {
+         return setIp(data)
+         
+     });
+
+
+ }
+//  sendCartItemToServer()
+ console.log("checking server response", ip)
 
 const getItem = (id) =>{
     const product = getProduct.products.find(items => items.id === id);
