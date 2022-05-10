@@ -17,7 +17,7 @@ const ProductProvider = ({children}) => {
         
     });
 
-    const [ip, setIp] = useState({})
+    const [ip, setIp] = useState("")
 const fetchDataFromServer = useCallback(()=>{
 
     fetch("http://localhost:8000/data")
@@ -53,7 +53,7 @@ useEffect(() =>{
 
  const retrieveIpFromServer = () =>{
      fetch("http://localhost:8000/users")
-     .then(res => res.json())
+     .then(res => res.text())
      .then(data => {
          return setIp(data)
          
@@ -61,19 +61,24 @@ useEffect(() =>{
 
 
  }
-
- const sendCartItemToServer = () => {
+ 
+ const sendCartItemToServer = (product) => {
+     
     fetch("http://localhost:8000/cart", {
         method: 'POST',
+        
         headers:{
             'Accept': 'text/html',
             'Content-Type': 'application/json'
         },
-        body:{
-            cartItem: getProduct.cart
-        }
-        .then(res => console.log("reply from post", res))
-    });
+        body: JSON.stringify({
+            cart: product,
+            ip: ip
+        })
+    })
+    .then(res => res.text())
+    .then(data => console.log(data))
+
  }
 
 const getItem = (id) =>{
@@ -103,7 +108,7 @@ const addToCart = (id) =>{
         
     });
 
-    sendCartItemToServer()
+    sendCartItemToServer(product)
    
   
 }
