@@ -1,11 +1,22 @@
 import React, {createContext, useCallback, useEffect, useState} from 'react';
 //import {storeProducts, detailProduct} from './data';
+import {useVisitorData} from '@fingerprintjs/fingerprintjs-pro-react'
 
 export const ProductContext = createContext();
 
 
 const ProductProvider = ({children}) => {
-    
+
+    const {isLoading, error, data} = useVisitorData()
+    if(isLoading){
+        console.log("loading")
+    }
+    if(error){
+        console.log(error.message)
+    }
+    if(data){
+        console.log(data)
+    }
     const [getProduct, setGetProduct] = useState({
     
         products: [],
@@ -51,6 +62,13 @@ useEffect(() =>{
      retrieveIpFromServer()
  }, [])
 
+ //
+ useEffect(() =>{
+   
+ }, [])
+
+ //5wpdoQWBcxMcvf3YyIXK
+
  const retrieveIpFromServer = () =>{
      fetch("http://localhost:8000/users")
      .then(res => res.text())
@@ -61,6 +79,8 @@ useEffect(() =>{
 
 
  }
+
+ 
  
  const sendCartItemToServer = (product) => {
      
@@ -80,6 +100,8 @@ useEffect(() =>{
     .then(data => console.log(data))
 
  }
+
+ 
 
 const getItem = (id) =>{
     const product = getProduct.products.find(items => items.id === id);
@@ -253,3 +275,6 @@ export {ProductConsumer, ProductProvider}
 // font-family: 'Lato', sans-serif;
 // font-family: 'Montserrat Alternates', sans-serif;
 // font-family: 'Sansita Swashed', cursive;
+
+
+
