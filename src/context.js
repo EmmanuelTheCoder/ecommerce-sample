@@ -7,16 +7,9 @@ export const ProductContext = createContext();
 
 const ProductProvider = ({children}) => {
 
-    const {isLoading, error, data} = useVisitorData()
-    if(isLoading){
-        console.log("loading")
-    }
-    if(error){
-        console.log(error.message)
-    }
-    if(data){
-        console.log(data)
-    }
+    const {getData} = useVisitorData()
+ 
+ 
     const [getProduct, setGetProduct] = useState({
     
         products: [],
@@ -28,7 +21,7 @@ const ProductProvider = ({children}) => {
         
     });
 
-    const [ip, setIp] = useState("")
+    const [visitorId, setVisitorId] = useState()
 const fetchDataFromServer = useCallback(()=>{
 
     fetch("http://localhost:8000/data")
@@ -59,23 +52,35 @@ useEffect(() =>{
  //send cart items to server
 
  useEffect(() =>{
-     retrieveIpFromServer()
+    
  }, [])
 
  //
  useEffect(() =>{
-   
+    getData().then(data =>{
+        if(data){
+            return setVisitorId(data.visitorId)
+        }
+    })
+    
  }, [])
 
- //5wpdoQWBcxMcvf3YyIXK
+ useEffect(() =>{
+    sendVisitorIdToServer()
+ }, [])
 
- const retrieveIpFromServer = () =>{
-     fetch("http://localhost:8000/users")
-     .then(res => res.text())
-     .then(data => {
-         return setIp(data)
-         
-     });
+ const sendVisitorIdToServer = () =>{
+     fetch("http://localhost:8000/users", {
+         method: 'POST',
+         headers: {
+             'Content-Type' : 'text/html',
+             'Accept' : 'application/json'
+         },
+         body: visitorId
+     })
+     .then(res => res.json())
+     .then(data => console.log(data))
+     
 
 
  }
@@ -93,7 +98,7 @@ useEffect(() =>{
         },
         body: JSON.stringify({
             cart: product,
-            ip: ip
+            visitorId: visitorId
         })
     })
     .then(res => res.text())
@@ -129,8 +134,6 @@ const addToCart = (id) =>{
         return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
         
     });
-
-    sendCartItemToServer(product)
    
   
 }
