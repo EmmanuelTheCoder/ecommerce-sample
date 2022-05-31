@@ -59,11 +59,13 @@ useEffect(() =>{
  useEffect(() =>{
     getData().then(data =>{
         if(data){
-            return setVisitorId(data.visitorId)
+            console.log(data.visitorId)
+            const {visitorId} = data
+            return setVisitorId(visitorId)
         }
     })
     
- }, [])
+ }, [getData])
 
  useEffect(() =>{
     sendVisitorIdToServer()
@@ -76,7 +78,7 @@ useEffect(() =>{
              'Content-Type' : 'text/html',
              'Accept' : 'application/json'
          },
-         body: visitorId
+         body: JSON.stringify(visitorId)
      })
      .then(res => res.json())
      .then(data => console.log(data))
@@ -113,7 +115,7 @@ const getItem = (id) =>{
     return product;
 }
 
-
+ 
 const handleDetail = (id) =>{
     const product = getItem(id);
     setGetProduct(()=>{
