@@ -1,4 +1,5 @@
-import React, {createContext, useCallback, useEffect, useState} from 'react';
+import React, {createContext, useCallback, 
+    useEffect, useState} from 'react';
 //import {storeProducts, detailProduct} from './data';
 import {useVisitorData} from '@fingerprintjs/fingerprintjs-pro-react'
 
@@ -22,7 +23,7 @@ const ProductProvider = ({children}) => {
     });
 
     const [visitorId, setVisitorId] = useState()
-const fetchDataFromServer = useCallback(()=>{
+    const fetchDataFromServer = useCallback(()=>{
 
     fetch("http://localhost:8000/data")
     .then(res => res.json())
@@ -36,7 +37,6 @@ const fetchDataFromServer = useCallback(()=>{
                 modalOpen: false
             }
         })
-       
         
        
     })
@@ -49,45 +49,49 @@ useEffect(() =>{
  }, [fetchDataFromServer]);
    
 
- //send cart items to server
-
- useEffect(() =>{
-    
- }, [])
-
- //
- useEffect(() =>{
-    getData().then(data =>{
-        if(data){
-            console.log(data.visitorId)
-            const {visitorId} = data
-            return setVisitorId(visitorId)
-        }
+ //send generated visitorId to the server
+ const sendVisitorIdToServer = useCallback(() =>{
+     console.log(visitorId)
+    fetch("http://localhost:8000/users", {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'text/plain',
+            'Accept' : 'application/json'
+        },
+        body: visitorId
     })
+    .then(res => res.json())
+    .then(data => console.log(data))
     
- }, [getData])
 
- useEffect(() =>{
-    sendVisitorIdToServer()
- }, [])
-
- const sendVisitorIdToServer = () =>{
-     fetch("http://localhost:8000/users", {
-         method: 'POST',
-         headers: {
-             'Content-Type' : 'text/html',
-             'Accept' : 'application/json'
-         },
-         body: JSON.stringify(visitorId)
-     })
-     .then(res => res.json())
-     .then(data => console.log(data))
-     
-
-
- }
+ },[visitorId])
 
  
+//generate unique visitorId using fingerprints the call the func that
+//sends it to the server
+ useEffect(() =>{
+    getData().then(data =>{
+             
+        if(data){
+            const dataId = data.visitorId
+            setVisitorId(dataId)
+            
+        }
+
+    })
+
+    visitorId && sendVisitorIdToServer()
+    
+    
+}, [visitorId, sendVisitorIdToServer, getData])
+
+
+
+
+
+ 
+
+
  
  const sendCartItemToServer = (product) => {
      
