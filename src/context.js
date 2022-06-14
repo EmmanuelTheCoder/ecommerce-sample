@@ -51,20 +51,24 @@ useEffect(() =>{
 
  //send generated visitorId to the server
  const sendVisitorIdToServer = useCallback(() =>{
-     console.log(visitorId)
+     const id = JSON.stringify(visitorId)
+     const ed = "emmanuel"
     fetch("http://localhost:8000/users", {
         method: 'POST',
         headers: {
-            'Content-Type' : 'text/plain',
+            'Content-Type' : 'application/json',
             'Accept' : 'application/json'
-        },
-        body: visitorId
+        }, 
+        body: JSON.stringify({
+            visitorId: visitorId
+        }) 
     })
     .then(res => res.json())
     .then(data => console.log(data))
     
 
  },[visitorId])
+
 
  
 //generate unique visitorId using fingerprints the call the func that
