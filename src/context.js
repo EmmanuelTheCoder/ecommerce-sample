@@ -51,8 +51,6 @@ useEffect(() =>{
 
  //send generated visitorId to the server
  const sendVisitorIdToServer = useCallback(() =>{
-     const id = JSON.stringify(visitorId)
-     const ed = "emmanuel"
     fetch("http://localhost:8000/users", {
         method: 'POST',
         headers: {
@@ -139,6 +137,7 @@ const addToCart = (id) =>{
     const price = product.price;
     product.total = price;
 
+    sendCartItemToServer(product)
     
     setGetProduct(()=>{
         return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
