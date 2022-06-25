@@ -37,16 +37,15 @@ const ProductProvider = ({children}) => {
                 modalOpen: false
             }
         })
-        
        
     })
 },[])
 
 useEffect(() =>{
         
-    fetchDataFromServer()
+    //fetchDataFromServer()
      
- }, [fetchDataFromServer]);
+ }, []);
    
 
  //send generated visitorId to the server
@@ -92,10 +91,44 @@ useEffect(() =>{
 
 
  
+ const retrieveCartFromServer = () =>{
+    fetch("http://localhost:8000/cart/findcart", {
+        method: "POST",
+        headers:{
+            'Accept': "application/json",
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+            visitorId: visitorId
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("cart item", data)
+        return setGetProduct(() => {
+            return {
+                products: data.storeProducts, 
+                detailProduct: data.detailProduct, 
+                modalProduct: data.detailProduct,
+                cart: data.collectCart,
+                sumTotal: 0,
+                modalOpen: false
+            }
+        })
+    })
+ }
+
+ useEffect(() =>{
+    retrieveCartFromServer()
+ }, [])
+
+ //The 'retrieveCartFromServer' function makes the dependencies of useEffect Hook (at line 123) change on every render.
+ // Move it inside the useEffect callback. Alternatively, wrap the definition of 'retrieveCartFromServer' in its own useCallback() Hook
 
 
- 
- const sendCartItemToServer = (product, tempProducts) => {
+
+
+ const sendCartItemToServer = (product, tempProducts) =>{
      
     fetch("http://localhost:8000/cart", {
         method: 'POST',
@@ -110,12 +143,12 @@ useEffect(() =>{
         })
     })
     .then(res => res.json())
-    .then(data => 
+    .then(data => {
         //return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
-        setGetProduct(() =>{
+        return setGetProduct(() =>{
             return {...getProduct, products: tempProducts, cart: [...getProduct.cart, data]}
         })
-    )
+    })
 
  }
 
@@ -157,7 +190,7 @@ const CartTotal = () =>{
     const arrayOfCartTotal = sumValue.map(val => val.total)
     const sum = arrayOfCartTotal.reduce((a,b) => a + b, 0)
 
-    setGetProduct(() =>{
+    return setGetProduct(() =>{
         return {...getProduct, sumTotal: sum}
     })
 
@@ -178,7 +211,7 @@ const openModal = id =>{
     cartProduct.total = price;
 
 
-    setGetProduct(()=>{
+    return setGetProduct(()=>{
         return {...getProduct, modalProduct: product, modalOpen: true, products: tempProducts, cart:[...getProduct.cart, cartProduct]}
     })
 }

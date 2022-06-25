@@ -11,9 +11,8 @@ export default function CartItems({items}) {
     if(typeof sumTotal !== undefined && sumTotal !== 0){
       return <p className="cart-total-amount">${sumTotal}</p>
 
-    }else{
-      return null
     }
+    return null
   }
 
   const CartTotalOrEmpty = () =>{
