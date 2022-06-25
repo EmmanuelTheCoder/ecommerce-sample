@@ -95,13 +95,13 @@ useEffect(() =>{
 
 
  
- const sendCartItemToServer = (product) => {
+ const sendCartItemToServer = (product, tempProducts) => {
      
     fetch("http://localhost:8000/cart", {
         method: 'POST',
         
         headers:{
-            'Accept': 'text/html',
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -109,8 +109,13 @@ useEffect(() =>{
             visitorId: visitorId
         })
     })
-    .then(res => res.text())
-    .then(data => console.log(data))
+    .then(res => res.json())
+    .then(data => 
+        //return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
+        setGetProduct(() =>{
+            return {...getProduct, products: tempProducts, cart: [...getProduct.cart, data]}
+        })
+    )
 
  }
 
@@ -137,12 +142,12 @@ const addToCart = (id) =>{
     const price = product.price;
     product.total = price;
 
-    sendCartItemToServer(product)
+    sendCartItemToServer(product, tempProducts)
     
-    setGetProduct(()=>{
-        return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
+    // setGetProduct(()=>{
+    //     return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
         
-    });
+    // });
    
   
 }

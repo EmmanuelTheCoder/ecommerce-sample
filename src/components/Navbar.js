@@ -5,7 +5,7 @@ import {ButtonContainer} from './Button';
 //import {ProductConsumer} from '../context'
 
 
-export default function Navbar(props) {
+export default function Navbar() {
     
     return (
         <Container>
