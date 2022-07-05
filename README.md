@@ -6,7 +6,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-![random photo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e9jmwmve4mp3ug5z85m6.png)
 
 ### `npm start`
 
