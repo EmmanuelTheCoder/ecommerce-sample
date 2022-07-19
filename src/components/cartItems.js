@@ -42,7 +42,7 @@ export default function CartItems({items}) {
           items.map((item) => {
             const {title, img, price, count, total, id} = item
             return(
-              <div key={id} className="cart-product-list">
+              <div className="cart-product-list" key={id}>
                   <img src={img} alt="cart product" className="cart-product-img"/>
                   <p>{title}</p>
                   <p> ${price}</p>

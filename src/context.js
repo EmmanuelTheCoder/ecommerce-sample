@@ -54,7 +54,7 @@ useEffect(() =>{
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json',
-            'Accept' : 'application/json'
+            'Accept' : 'application/json',
         }, 
         body: JSON.stringify({
             visitorId: visitorId
@@ -91,7 +91,7 @@ useEffect(() =>{
 
 
  
- const retrieveCartFromServer = () =>{
+ const retrieveCartFromServer = useCallback(() =>{
     fetch("http://localhost:8000/cart/findcart", {
         method: "POST",
         headers:{
@@ -116,11 +116,11 @@ useEffect(() =>{
             }
         })
     })
- }
+ }, [visitorId])
 
  useEffect(() =>{
     retrieveCartFromServer()
- }, [])
+ }, [retrieveCartFromServer])
 
  //The 'retrieveCartFromServer' function makes the dependencies of useEffect Hook (at line 123) change on every render.
  // Move it inside the useEffect callback. Alternatively, wrap the definition of 'retrieveCartFromServer' in its own useCallback() Hook
@@ -305,7 +305,8 @@ const decrementQuantity = (id) =>{
            incrementQuantity: incrementQuantity,
            decrementQuantity: decrementQuantity,
            deleteFromCart: deleteFromCart,
-           CartTotal: CartTotal
+           CartTotal: CartTotal,
+           retrieveCartFromServer: retrieveCartFromServer
            
        }} >
            {children}

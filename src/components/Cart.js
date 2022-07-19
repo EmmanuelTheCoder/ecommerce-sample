@@ -12,7 +12,8 @@ export default function Cart() {
                     const {cart} = value;
                     return(
                         <div>
-                            <CartItems items={cart}/>
+                            
+                            <CartItems items={cart} />
                         </div>
                     );
 
