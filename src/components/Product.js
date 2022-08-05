@@ -11,7 +11,7 @@ export default function Product({product}) {
 
     return (
           
-            <ProductWrapper className="centetdfdfd"> 
+            <ProductWrapper> 
             {/* col-9 mx-auto col-md-6 col-lg-3 my-3 */}
            
                <ProductConsumer>
@@ -39,6 +39,7 @@ export default function Product({product}) {
 
                                         value.addToCart(id);
                                         value.openModal(id);
+                                        value.retrieveCartFromServer();
                                         
                                     }
                                     }
