@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import {ButtonContainer} from './Button';
 import {Link} from 'react-router-dom';
@@ -12,7 +12,6 @@ export default function Product({product}) {
     return (
           
             <ProductWrapper> 
-            {/* col-9 mx-auto col-md-6 col-lg-3 my-3 */}
            
                <ProductConsumer>
                    {value =>{
