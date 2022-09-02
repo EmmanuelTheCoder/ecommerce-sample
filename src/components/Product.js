@@ -25,7 +25,8 @@ export default function Product({product}) {
                                     </div>
                                     
                                 <Link to="/details">
-                                    <div className="image-container" onClick={()=>value.handleDetail(id)}>
+                                    <div className="image-container" 
+                                    onClick={()=>value.handleDetail(id)}>
                                         <img src={img} alt={title}/>
                                     </div>
                                 
@@ -38,7 +39,6 @@ export default function Product({product}) {
 
                                         value.addToCart(id);
                                         value.openModal(id);
-                                        value.retrieveCartFromServer();
                                         
                                     }
                                     }
@@ -67,7 +67,6 @@ const ProductWrapper = styled.div`
         box-shadow: .5px 1px 2px 1.5px  grey;
         width: 21rem;
         transition: 1s all ease;
-       
     }
     .image-container{
         transition: 1s all ease;
@@ -98,5 +97,4 @@ const ProductWrapper = styled.div`
       }
   }
   
-
 `

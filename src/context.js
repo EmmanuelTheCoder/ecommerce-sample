@@ -1,20 +1,17 @@
-import React, {createContext, useCallback, 
-    useEffect, useState} from 'react';
-//import {storeProducts, detailProduct} from './data';
-import {useVisitorData} from '@fingerprintjs/fingerprintjs-pro-react'
+import React, {createContext, useState} from 'react';
+import {storeProducts, detailProduct} from './data';
 
 export const ProductContext = createContext();
 
 
 const ProductProvider = ({children}) => {
 
-    const {getData} = useVisitorData()
  
  
     const [getProduct, setGetProduct] = useState({
     
-        products: [],
-        detailProduct: {},
+        products: storeProducts,
+        detailProduct: detailProduct,
         cart: [],
         modalOpen: false,
         modalProduct: {},
@@ -22,137 +19,6 @@ const ProductProvider = ({children}) => {
         
     });
 
-    const [visitorId, setVisitorId] = useState()
-    const fetchDataFromServer = useCallback(()=>{
-
-    fetch("http://localhost:8000/data")
-    .then(res => res.json())
-    .then(data => {
-        setGetProduct(() => {
-            return {products: data.storeProducts, 
-                detailProduct: data.detailProduct, modalProduct: 
-                data.detailProduct,
-                cart: [],
-                sumTotal: 0,
-                modalOpen: false
-            }
-        })
-       
-    })
-},[])
-
-useEffect(() =>{
-        
-    //fetchDataFromServer()
-     
- }, []);
-   
-
- //send generated visitorId to the server
- const sendVisitorIdToServer = useCallback(() =>{
-    fetch("http://localhost:8000/users", {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/json',
-            'Accept' : 'application/json',
-        }, 
-        body: JSON.stringify({
-            visitorId: visitorId
-        }) 
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    
-
- },[visitorId])
-
-
- 
-//generate unique visitorId using fingerprints the call the func that
-//sends it to the server
- useEffect(() =>{
-    getData().then(data =>{
-             
-        if(data){
-            const dataId = data.visitorId
-            setVisitorId(dataId)
-            
-        }
-
-    })
-
-    visitorId && sendVisitorIdToServer()
-    
-    
-}, [visitorId, sendVisitorIdToServer, getData])
-
-
-
-
-
- 
- const retrieveCartFromServer = useCallback(() =>{
-    fetch("http://localhost:8000/cart/findcart", {
-        method: "POST",
-        headers:{
-            'Accept': "application/json",
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify({
-            visitorId: visitorId
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log("cart item", data)
-        return setGetProduct(() => {
-            return {
-                products: data.storeProducts, 
-                detailProduct: data.detailProduct, 
-                modalProduct: data.detailProduct,
-                cart: data.collectCart,
-                sumTotal: 0,
-                modalOpen: false
-            }
-        })
-    })
- }, [visitorId])
-
- useEffect(() =>{
-    retrieveCartFromServer()
- }, [retrieveCartFromServer])
-
- //The 'retrieveCartFromServer' function makes the dependencies of useEffect Hook (at line 123) change on every render.
- // Move it inside the useEffect callback. Alternatively, wrap the definition of 'retrieveCartFromServer' in its own useCallback() Hook
-
-
-
-
- const sendCartItemToServer = (product, tempProducts) =>{
-     
-    fetch("http://localhost:8000/cart", {
-        method: 'POST',
-        
-        headers:{
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            cart: product,
-            visitorId: visitorId
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        //return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
-        return setGetProduct(() =>{
-            return {...getProduct, products: tempProducts, cart: [...getProduct.cart, data]}
-        })
-    })
-
- }
-
- 
 
 const getItem = (id) =>{
     const product = getProduct.products.find(items => items.id === id);
@@ -174,13 +40,11 @@ const addToCart = (id) =>{
     product.count = 1;
     const price = product.price;
     product.total = price;
-
-    sendCartItemToServer(product, tempProducts)
     
-    // setGetProduct(()=>{
-    //     return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
+    setGetProduct(()=>{
+        return {...getProduct, products: tempProducts, cart: [...getProduct.cart, product]}
         
-    // });
+    });
    
   
 }
@@ -215,6 +79,7 @@ const openModal = id =>{
         return {...getProduct, modalProduct: product, modalOpen: true, products: tempProducts, cart:[...getProduct.cart, cartProduct]}
     })
 }
+
 const closeModal = () =>{
 
     const sumValue = [...getProduct.cart]
@@ -306,7 +171,7 @@ const decrementQuantity = (id) =>{
            decrementQuantity: decrementQuantity,
            deleteFromCart: deleteFromCart,
            CartTotal: CartTotal,
-           retrieveCartFromServer: retrieveCartFromServer
+           
            
        }} >
            {children}
