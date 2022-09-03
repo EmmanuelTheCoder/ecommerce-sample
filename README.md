@@ -5,6 +5,3 @@
 
 ![Detail page gif](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/af6pt7aaij9z9baflyfv.gif)
 
-
-
-![cart item gif](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xv2a8e7yu68gb0uixj5m.gif)
